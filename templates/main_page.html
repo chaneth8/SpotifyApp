@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron light-blue">
+            <h1>Welcome, {{ username }}!</h1>
+        </div>
+
+        <div class= "center-half jumbotron">
+            <h2>Click Below To Find Out More:</h2>
+            <h3 style = "text-align: center"><a href = "{%url 'top_tracks' username token%}" >Your Top Tracks</a></h3>
+            <h3 style = "text-align: center"><a href = "{%url 'top_artists' username token%}" >Your Top Artists</a></h3>
+            <h3 style = "text-align: center"><a href = "{%url 'top_genres' username token%}" >Your Top Genres</a></h3>
+            <h3 style = "text-align: center"><a href = "{%url 'new_releases' username token%}" >New Releases On Spotify</a></h3>
+        </div>
+
+    </div>
+</body>
+</html>

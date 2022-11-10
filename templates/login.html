@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron light-blue">
+            <h1>Welcome To Spotify Stats!</h1>
+        </div> 
+        <div class= "center-half jumbotron">
+            <div class = "center">
+                Enter Your Username To Continue
+            </div>
+            <form class = "center" action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <input type="text", name="username">
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

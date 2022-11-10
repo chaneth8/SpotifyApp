@@ -1,0 +1,21 @@
+.light-blue {
+    background-color: lightblue;
+    text-align: center;
+}
+
+.center-half {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.center {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.center-table {
+    margin-left: auto;
+    margin-right: auto;
+  }

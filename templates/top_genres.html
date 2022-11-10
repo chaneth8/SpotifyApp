@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Genres</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class = "container">
+        <div id = "topbar" class = "jumbotron light-blue">
+        </div>
+        <div id="container" style="width: 75%;" class = "center">
+            <canvas id="pie-chart"></canvas>
+          </div>
+        
+          <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+          <script>
+    
+            const data = {
+                labels: {{ label|safe }},
+                datasets: [{
+                    data: {{ data|safe }},
+                    backgroundColor: ['#1B3F8B', '#1464F4', '#6495ED', '#4D6FAC', '#3579DC', '#88ACE0', '#4D71A3', '#BCD2EE', '#4973AB', '#4372AA', '#7AA9DD', '#499DF5'],
+                }]
+            }
+    
+            const config = {
+                type: 'pie',
+                data: data,
+                options: {
+                    responsive: true
+                }
+            };
+    
+            window.onload = function() {
+              var ctx = document.getElementById('pie-chart').getContext('2d');
+              window.myPie = new Chart(ctx, config);
+            };
+        
+          </script>
+    
+          <div id = "explanation" class = "center">
+    
+          </div>
+    </div>
+</body>
+
+<script type="text/babel">
+    class Topbar extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {shown: true};
+            this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick(){
+            this.setState(prevState => ({
+                shown: !prevState.shown
+            }));
+        }
+
+        render() {
+            if (this.state.shown) {
+                return (
+                    <div>
+                        <div onClick = {this.handleClick}>
+                            <h1>Your Top Genres:</h1>
+                        </div>
+                        <div> 
+                            <a href = "{%url 'main_page' username token%}" ><h3>Main Page</h3></a>
+                        </div>
+                    </div>
+                );
+            } else {
+                return  (
+                    <div onClick = {this.handleClick}>
+                        <h1>Your Top Genres:</h1>
+                    </div>
+                );
+            }
+        }
+    }
+
+    class Explanation extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {hidden: true};
+            this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick(){
+            this.setState(prevState => ({
+                hidden: !prevState.hidden
+            }));
+        }
+
+        render() {
+            if (this.state.hidden) {
+                return (
+                    <div onClick = {this.handleClick}>
+                        <h1>How Is This Calculated?:</h1>
+                    </div>
+                );
+            } else {
+                return  (
+                    <div> 
+                        <div onClick = {this.handleClick}>
+                            <h1>How Is This Calculated?:</h1>
+                        </div>
+                        <div> 
+                            By the number of artists you listen to, that fall within each genre.
+                        </div>
+                    </div>
+                );
+            }
+        }
+    }
+
+    ReactDOM.render(<Topbar />, document.getElementById('topbar'));
+    ReactDOM.render(<Explanation />, document.getElementById('explanation'));
+</script>
+
+</html>
